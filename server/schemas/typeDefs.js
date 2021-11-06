@@ -35,7 +35,7 @@ type Book {
   }
 
   type Query {
-    me: User,
+    me: User
   }
 
   type Mutation {

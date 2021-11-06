@@ -11,19 +11,16 @@ import { REMOVE_BOOK } from '../gql/mutations';
 
 
 const SavedBooks = () => {
-  const [userData, setUserData] = useState({});
-
 
   //use Query and use mutation for GET_ME and REMOVE_BOOK, from the gql front end folder
-  const { loading, data} = useQuery(GET_ME);
+  const {data} = useQuery(GET_ME);
   const [removeBook, {error}] = useMutation(REMOVE_BOOK);
 
 
   if (data) {
-    console.log(data.me.savedBooks);
+    console.log(data);
   }
   // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
