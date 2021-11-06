@@ -4,7 +4,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 
 // import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
-import { ADD_USER } from '../utils/mutations';
+import { ADD_USER } from '../gql/mutations';
 
 const SignupForm = () => {
   // set initial form state
