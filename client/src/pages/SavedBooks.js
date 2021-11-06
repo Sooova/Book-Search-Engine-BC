@@ -20,7 +20,6 @@ const SavedBooks = () => {
 
 
   if (data) {
-    console.log(data)
     console.log(data.me.savedBooks);
   }
   // use this to determine if `useEffect()` hook needs to run again
