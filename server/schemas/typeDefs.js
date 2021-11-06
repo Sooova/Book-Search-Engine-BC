@@ -16,7 +16,7 @@ type Book {
     # authors: String
     description: String
     title: String
-    Image: String
+    image: String
     link: String
 }
 
@@ -29,7 +29,7 @@ type Book {
       description: String
       title: String
       bookId: String
-      Image: String
+      image: String
       link: String
       authors: [String]
   }
