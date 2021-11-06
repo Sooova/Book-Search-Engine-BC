@@ -5,8 +5,18 @@ import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
+import {useMutation, useQuery} from '@apollo/react-hooks';
+import { GET_ME } from '../utils/queries';
+import { REMOVE_BOOK } from '../gql/mutations';
+
+
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
+
+
+  //use Query and use mutation for GET_ME and REMOVE_BOOK, from the gql front end folder
+  const { loading, data} = useQuery(GET_ME);
+  const [removeBook, {error}] = useMutation(REMOVE_BOOK);
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
@@ -45,7 +55,12 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      //removeBook mutation
+      const {data} = await removeBook({
+        variables: { bookId }
+      });
+      //if code gets to this line, query went through okay, so we can delete data from local storage now
+      removeBookId(bookId);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
@@ -53,8 +68,7 @@ const SavedBooks = () => {
 
       const updatedUser = await response.json();
       setUserData(updatedUser);
-      // upon success, remove book's id from localStorage
-      removeBookId(bookId);
+      
     } catch (err) {
       console.error(err);
     }
